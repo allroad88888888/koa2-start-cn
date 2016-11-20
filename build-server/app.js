@@ -1,96 +1,134 @@
 'use strict';
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _temp = require('./database/temp');
+
+var _koaOnerror = require('koa-onerror');
+
+var _koaOnerror2 = _interopRequireDefault(_koaOnerror);
+
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
 var koa = require('koa');
 var logger = require('koa-logger');
+var send = require('koa-send');
 var router = require('koa-router')();
+
+var bodyParser = require('koa-bodyparser');
+
+var artTemplate = require('art-template');
+artTemplate.config('base', _path2.default.resolve(__dirname, 'views/'));
+artTemplate.config('extname', '.html');
 
 //var views = require('koa-views');
 
 
-//import artTemplate from 'koa-artTemplate';
-
-//app.use(koaArt(path.resolve(__dirname, 'views/')))
-
 var app = new koa();
+app.use(logger()); //日志
+app.use(bodyParser()); //表单什么数据转换 
 
-console.log("第一次提价o");
+//异常处理
+(0, _koaOnerror2.default)(app);
 
-/*// logger
-app.use(ctx =>{
-  // (2) 进入 logger 中间件
-  var start = new Date;
-  yield next;
-  // (4) 再次进入 logger 中间件，记录2次通过此中间件「穿越」的时间
-  var ms = new Date - start;
-  console.log('%s %s - %s', this.method, this.url, ms);
-});
-*/
-/*app.use((ctx, next) => {
-  const start = new Date();
-  return next().then(() => {
-    const ms = new Date() - start;
-    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-  });
-});
-
-app.use(async (ctx, next) => {
-  const start = new Date();
-  await next();
-  const ms = new Date() - start;
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-});*/
-
-/*app.use(views(__dirname + '/views', {
-  map: {
-    html: 'underscore'
-  }
-}));*/
-//app.use(koaArt(path.resolve(__dirname, 'views/')));
-app.use(logger());
-
-/*app.use(ctx => {
-  ctx.body = 'Hello World5555555666666666655555';
-});*/
-/*var html = require("./index.html");
-console.log("html",html)*/
-/*app.use(async (ctx, next) => {
-  await ctx.render('./views/index.html')
-})*/
+/*处理  404   500  页面 */
 app.use(function () {
-  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(ctx) {
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+  var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(ctx, next) {
+    return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return ctx.render('index.html');
+            return next();
 
           case 2:
+            console.log("status", ctx.status);
+
+            if (!(404 != ctx.status && 500 != ctx.status)) {
+              _context.next = 5;
+              break;
+            }
+
+            return _context.abrupt('return');
+
+          case 5:
+            _context.t0 = ctx.accepts('html', 'json');
+            _context.next = _context.t0 === 'html' ? 8 : _context.t0 === 'json' ? 11 : 13;
+            break;
+
+          case 8:
+            ctx.type = 'html';
+            ctx.body = artTemplate(ctx.status, ctx);
+            return _context.abrupt('break', 15);
+
+          case 11:
+            ctx.body = {
+              message: 'Page Not Found'
+            };
+            return _context.abrupt('break', 15);
+
+          case 13:
+            ctx.type = 'html';
+            ctx.body = artTemplate(ctx.status, ctx);
+
+          case 15:
           case 'end':
             return _context.stop();
         }
       }
-    }, _callee, this);
+    }, _callee, undefined);
   }));
 
-  return function (_x) {
+  return function (_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }());
 
-/*router.get('/',function (ctx, next) {
-   ctx.body =  ctx.render('index.html')
-});
+//onerror(app, {text:"你大爷 出错了 啦   哈哈 你帮你"})
+/*路由  处理  */
 
-app.use(router.routes())
-  .use(router.allowedMethods());*/
+var database = new _temp.DB();
+//console.log("DB",dd.add);
+
+router.get('/', function () {
+  var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(ctx, next) {
+    var a;
+    return _regenerator2.default.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            // 发送静态文件
+            a = artTemplate("index", {});
+
+            console.log("a", database);
+            _context2.next = 4;
+            return database.find().then(function (result) {
+              ctx.body = ccc;
+            });
+
+          case 4:
+          case 'end':
+            return _context2.stop();
+        }
+      }
+    }, _callee2, undefined);
+  }));
+
+  return function (_x3, _x4) {
+    return _ref2.apply(this, arguments);
+  };
+}());
+
+app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(3000);

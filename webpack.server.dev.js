@@ -14,11 +14,11 @@ module.exports = {
         loaders: [{
             test: /\.js?$/,
             exclude: /(node_modules|bower_components)/,
-            loader: 'babel-loader?presets[]=es2015',
-            /*query: {
-              presets: ['es2015?presets[]=react,presets[]=es2015',],
-              plugins: ["transform-async-to-generator"]
-            }*/
+            loader: 'babel-loader',
+            query: {
+               presets: ['es2015',"stage-0", "react"],
+               plugins: ["add-module-exports", "transform-runtime"],
+            }
         }]
     },
     plugins: [

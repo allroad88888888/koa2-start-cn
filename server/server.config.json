@@ -1,0 +1,8 @@
+{
+	"database":{
+		"ip":"121.40.49.82",
+		"port":27017,
+		"auto_reconnect":true,
+		"safe":true
+	}
+}

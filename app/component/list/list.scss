@@ -1,0 +1,22 @@
+$font-size: 16;
+$white: rgb(255, 255, 255);
+$color-ec: rgb(236, 236, 236);
+@function switchRem($unit) {
+  @return $unit/$font-size+rem;
+}
+
+.list-group{
+  font-size: 14px;
+  .list-group-item{
+    margin-left: switchRem(20);
+    padding: switchRem(16) switchRem(16) switchRem(10) 0;
+    border-bottom: 1px solid $color-ec;
+    display: flex;
+    justify-content: space-between;
+    line-height: 1.42857143;
+
+    &:last-child{
+      border-bottom: none;
+    }
+  }
+}

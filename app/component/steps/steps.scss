@@ -1,0 +1,94 @@
+$font-size: 16;
+$white: rgb(255, 255, 255);
+$color-ec: rgb(236, 236, 236);
+$color-9b:rgb(155,155,155);
+$yujian:rgb(235,102,26);
+@function switchRem($unit) {
+  @return $unit/$font-size+rem;
+}
+
+.steps{
+  width: 100%;
+  box-sizing: border-box;
+  padding: switchRem(10) switchRem(10) switchRem(5);
+  position: relative;
+  z-index: 0;
+  .steps-item{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    vertical-align:top;
+  }
+  .steps-line{
+    width: 100%;
+    height: 1px;
+    background: $color-9b;
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    top: switchRem(11);
+    z-index: -100;
+  }
+  .steps-step{
+    //text-align: center;
+    font-size: 12px;
+    z-index: 2;
+
+    .steps-head{
+      //padding: 1px;
+    }
+
+    .steps-icon{
+      width: switchRem(23);
+      height: switchRem(23);
+      line-height: switchRem(23);
+      border-radius: 50%;
+      //box-sizing: border-box;
+      border: 1px solid $color-9b;
+      background: $white;
+      text-align: center;
+      margin: 0 auto;
+      z-index: 2;
+    }
+    .steps-title{
+      padding: switchRem(5) switchRem(5);
+      line-height: switchRem(20);
+    }
+  }
+}
+
+.steps-item-passed{
+  .steps-line{
+    background: $yujian;
+
+  }
+  &:last-child{
+    .steps-line{
+      background: $color-9b;
+    }
+  }
+  .steps-step{
+    .steps-icon{
+      background: $yujian;
+      color: $white;
+      border-color: $yujian ;
+    }
+  }
+
+}
+.steps-item-process {
+  .steps-step{
+    .steps-icon{
+      background: $color-9b;
+      color: $white;
+      border-color: $color-9b ;
+    }
+  }
+}
+
+.steps-item-last{
+
+  .steps-line{
+    width: 0;
+  }
+}

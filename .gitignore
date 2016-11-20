@@ -45,3 +45,5 @@ config/*
 dist
 public/build
 build
+
+build-server

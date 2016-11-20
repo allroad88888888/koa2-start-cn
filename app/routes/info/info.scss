@@ -1,0 +1,23 @@
+$font-size: 16;
+@function switchRem($unit) {
+    @return $unit/$font-size+rem;
+}
+.contair-info{
+	width: 100%;
+	.contair-btn{
+		width: 100%;
+		box-sizing: border-box;
+		margin: switchRem(16) 7%;
+	}
+}
+.contair-info-ul{
+	width: 100%;
+	background: #fff;
+	li{
+		list-style: none;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0 switchRem(14);
+		border-bottom: 1px solid #ececec;
+	}
+}

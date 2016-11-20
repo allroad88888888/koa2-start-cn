@@ -1,0 +1,65 @@
+$font-size: 16;
+@function switchRem($unit) {
+    @return $unit/$font-size+rem;
+}
+.service-head{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    background: #fff;
+    box-sizing: border-box;
+    // padding: 0 1rem;
+    height: 2.8125rem;
+    border-bottom: 1px solid #ececec;
+    .head-return{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+         .icon-return{
+             .icon-return{
+                 width: switchRem(30);
+                 height: switchRem(30);
+                 fill:#4a4a4a;
+             }
+         }
+    }
+    .head-search{
+        position: relative;
+        flex: 1;
+        border: 1px solid #ececec;
+        .head-search-input{
+            width: 100%;
+        }
+        .icon-search{
+            position: absolute;
+            left: switchRem(-5);
+            top: 0;
+            display: block;
+            .icon-search{
+                width: 2.875rem;
+                height: 1.875rem;
+                fill: #bbbbbb;
+            }
+        }
+        .head-search-input{
+            height: 28px;
+            color: #e4e4e4;
+            display: flex;
+            align-items: center;
+            padding-left: 27px;
+            box-sizing: border-box;
+            border: none;
+        }
+    }
+    .head-btn{
+            margin-right: 16px;
+    margin-left: 3px;
+        .btn-success{
+            height: 30px;
+            background: #fff;
+            border: none;
+        }
+    }
+}

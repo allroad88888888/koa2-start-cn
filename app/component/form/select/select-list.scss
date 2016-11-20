@@ -1,0 +1,110 @@
+$font-size: 16;
+@function switchRem($unit) {
+    @return $unit/$font-size+rem;
+}
+
+.drop-up{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+   // flex-wrap: wrap;
+}
+
+.virtual-list{
+    max-height:80%;
+    width: 90%;
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-y:auto;
+    box-sizing: border-box;
+    /* width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; */
+    //padding: 0 5% ;
+   /*  .contait-scroll{
+    background-color: #fff;
+   } */
+}
+
+.drop-todo{
+    width: 100%;
+    // height: switchRem(48);
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   /*  border-top-left-radius: 4px;
+   border-top-right-radius: 4px; */
+    span{
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: switchRem(16) 0;
+        color: #fff;
+        background: #eb661a;
+        border-radius: 0 0 6px 6px;
+        /*border-radius: 5px;*/
+    }
+    border-bottom: 1px solid #ececec;
+}
+
+.virtual-list .drop-up-one{
+    //width: 80%;
+    /* max-height:80%;
+    max-width: 90%!important;
+    min-width: 30%; */
+    //width: 80%;
+    //margin: 30% 0;
+   /*  border-bottom-left-radius: 4px;
+   border-bottom-right-radius: 4px; */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    //margin: 30% auto;
+    background: #fff;
+    border-right: 1px solid #ececec;
+    box-sizing: border-box;
+    /* border-radius: 4px; */
+   // margin-right: 1px;
+    &:last-child{
+        border-right-width:0;
+    }
+   /*  &:nth-child(2){
+       width: 40%;
+       &:first-child{
+            width: 40%;
+       }
+      
+   } */
+    li{
+        padding: switchRem(16) switchRem(14);
+        word-wrap: break-word;
+        line-height: switchRem(24);
+        text-align: center;
+        // padding: switchRem(100) 0;
+    }
+    .select{      
+        color: #eb661a;
+        background-color:#ececec;
+    }
+}
